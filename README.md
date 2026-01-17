@@ -34,4 +34,23 @@
   paginator + current page / enteries
 
 3. usePersistentHook
+ it's a custom hoom
 -> It Remembers which row does user selected on each page, even when he navigate away and comes back 
+Keeps track of which items (by ID) are selected on each page
+Uses a Map where each page number points to a Set of selected IDs
+
+getSelectedIdsForPage - Gets all selected IDs for a specific page
+isSelected - Checks if a specific item is selected on a page
+toggleRow - Selects or unselects a single item (checkbox behavior)
+setAllRowsOnPage - Selects or unselects all items on a page (select-all checkbox)
+updateSelection - Updates the selection state and cleans up empty pages
+
+
+## Major Challenges faced
+1.  By default, most table libraries (including PrimeReact) only track selection for the currently visible rows. When you paginate, previous selections are lost.
+- I've made separate hook
+
+2. Storing and filtering thousands of selected IDs can cause re-renders or memory issues.
+- I've used Set<number> 
+
+3. Select All Behavior Ambiguity
