@@ -12,7 +12,7 @@ export const RowSelectionOverlay = ({ onSelect }: RowSelectionOverlayProps) => {
   const handleApply = () => {
     const num = parseInt(inputValue, 10);
 
-    if (isNaN(num) || num <= 0) {
+    if (isNaN(num) || num <= 0) { 
       alert("Please enter a valid positive number.");
       return;
     }
