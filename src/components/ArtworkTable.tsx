@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { DataTable} from 'primereact/datatable';
 import { Column } from 'primereact/column'; 
 import type { Artwork } from '../types/TableData';
-import { usePersistentSelection } from '../hooks/usePersistentSelection'; // ✅
+import { usePersistentSelection } from '../hooks/usePersistentSelection'; 
 
 const ROWS_PER_PAGE = 12;
 
@@ -13,7 +13,7 @@ export default function ArtworkTable() {
   const [currentPage, setCurrentPage] = useState(0); // 0-based
   const [loading, setLoading] = useState(true);
 
-  // ✅ Use the persistent hook
+
   const { getSelectedIdsForPage, setAllRowsOnPage } = usePersistentSelection();
 
   // Load data for 1-based page
@@ -36,7 +36,7 @@ export default function ArtworkTable() {
     loadPage(1);
   }, []);
 
-  // ✅ Get selected rows for CURRENT page (1-based)
+  
   const selectedRows = useMemo(() => {
     const oneBasedPage = currentPage + 1;
     const selectedIds = getSelectedIdsForPage(oneBasedPage);
@@ -53,7 +53,7 @@ export default function ArtworkTable() {
     const selectedItems = e.value || [];
     const ids = selectedItems.map((item: Artwork) => item.id);
     const oneBasedPage = currentPage + 1;
-    // ✅ Save selection for this page
+ 
     setAllRowsOnPage(oneBasedPage, ids, true);
   };
 
@@ -75,7 +75,7 @@ export default function ArtworkTable() {
         first={currentPage * ROWS_PER_PAGE}
         onPage={onPageChange}
         selectionMode="multiple"
-        selection={selectedRows} // ✅ Must be derived from hook
+        selection={selectedRows}
         onSelectionChange={onSelectionChange}
         loading={loading}
         responsiveLayout="scroll"
